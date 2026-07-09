@@ -31,6 +31,7 @@ docs=(
 )
 
 printf '%s\n' "$version" > VERSION
+perl -0pi -e 's/^PROJECT_NUMBER[[:space:]]*=.*$/PROJECT_NUMBER         = '"$version"'/m' Doxyfile
 
 perl -0pi -e 's/version = "\d+\.\d+\.\d+"/version = "'"$version"'"/' packaging/conan/conanfile.py
 cat > packaging/conan/conandata.yml <<EOF

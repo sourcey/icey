@@ -37,6 +37,8 @@ docs=(
 
 current_version=$(tr -d '[:space:]' < VERSION)
 [ "$current_version" = "$version" ] || fail "VERSION contains $current_version, expected $version"
+grep -Eq '^PROJECT_NUMBER[[:space:]]*=[[:space:]]*'"$version"'$' Doxyfile \
+    || fail "Doxyfile PROJECT_NUMBER is not synced to $version"
 
 grep -Eq '^    version = "'"$version"'"$' packaging/conan/conanfile.py \
     || fail "packaging/conan/conanfile.py is not synced to $version"
